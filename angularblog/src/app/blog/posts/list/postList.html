@@ -1,0 +1,84 @@
+<!--<div class="container">
+    <div class="row">
+        <div class="col-3" *ngFor="let item of postList | async " >
+            <mat-card>
+                <mat-card-header>
+                  <mat-card-title>{{item.title}}</mat-card-title>
+                  <mat-card-subtitle>{{item.subTitle}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image [src]="item.imgUrl" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                  <p>{{item.content}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+              
+        </div>
+    </div>
+</div> -->
+
+<div class="container-fuid">
+  <div class="row">
+    <div class="col-12">
+      <ng-container *ngIf="(getPostList() | async) as postListItems;">
+        <mat-table [dataSource]="postListItems" class="w-100 mat-elevation-z8 post-list-table">
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="subTitle">
+            <mat-header-cell *matHeaderCellDef> Subtítulo </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.subTitle}} </mat-cell>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="imgUrl">
+            <mat-header-cell *matHeaderCellDef> Imagem Url </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.imgUrl}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>Ação</mat-header-cell>
+            <mat-cell *matCellDef="let element">           
+              <button mat-icon-button 
+                      (click)="deletePost(element); $event.stopPropagation()"
+                      aria-label="Delete post">
+                      <mat-icon>delete</mat-icon>
+              </button> 
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editPost(row)"></mat-row>
+        </mat-table>
+      </ng-container> 
+      <ng-template #loading>
+        <mat-progress-bar *ngIF="isLoading" mode="indeterminate"> </mat-progress-bar>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end">
+      <button (click) = "createPost()" mat-fab color="primary" matTooltip="Criar um novo Post">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+

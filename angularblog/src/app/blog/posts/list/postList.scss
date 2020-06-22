@@ -1,0 +1,12 @@
+.post-list-table {
+    ::shadow{
+        .mat-row{
+            &:hover{
+                background-color: #f4f4f4;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
+    

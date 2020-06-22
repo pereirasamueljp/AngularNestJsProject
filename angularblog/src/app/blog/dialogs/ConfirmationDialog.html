@@ -1,0 +1,13 @@
+<h1 mat-dialog-title> Confirme a ação </h1>
+<div class="mb-2">
+    <p>Deseja continuar?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button 
+            type="button"
+            (click)="submit()"
+            color="warn">
+            Continuar
+    </button>
+</div>
